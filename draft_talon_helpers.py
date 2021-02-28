@@ -30,6 +30,10 @@ class Actions:
         draft_manager.hide()
         ctx.tags = []
 
+    def draft_clear():
+        """Delete all text in draft window."""
+        draft_manager.area.value = ""
+
     def draft_select(start_anchor: str,
                      end_anchor: str="",
                      include_trailing_whitespace: int=0):
