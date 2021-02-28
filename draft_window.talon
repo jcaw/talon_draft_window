@@ -1,5 +1,6 @@
 # These are active when we have focus on the draft window
 title: Talon Draft
+tag: user.draft_window_showing
 -
 # Position cursor before word
 move <user.draft_anchor>:
