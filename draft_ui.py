@@ -15,14 +15,12 @@ class DraftManager:
 
     def show(self, text: Optional[str] = None):
         """Show the window. If provided, set text to `text`."""
-
         if text is not None:
             self.area.value = text
         self.area.show()
 
     def hide(self):
         """Hide the window."""
-
         self.area.hide()
 
     def get_text(self) -> str:
@@ -41,7 +39,6 @@ class DraftManager:
         height: Optional[int] = None,
     ):
         """Move/resize window, without having to change all properties."""
-
         rect = self.area.rect
         if xpos is not None:
             rect.x = xpos
