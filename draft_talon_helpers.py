@@ -3,6 +3,9 @@ from typing import Optional
 from talon import ui, Module, Context
 from .draft_ui import DraftManager
 
+from user.utils.formatting import SurroundingText
+
+
 mod = Module()
 ctx = Context()
 mod.tag("draft_window_showing", desc="Tag set when draft window showing")
@@ -121,3 +124,19 @@ def draft_window_position(m) -> str:
     """
 
     return "".join(m)
+
+
+context = Context()
+context.matches = r"""
+title: Talon Draft
+tag: user.draft_window_showing
+"""
+
+@context.action_class("user")
+class DraftActions:
+    def surrounding_text() -> Optional[SurroundingText]:
+        area = draft_manager.area
+        return SurroundingText(
+            text_before=area[area.sel.left-50 : area.sel.left],
+            text_after =area[area.sel.right   : area.sel.right+50],
+        )
