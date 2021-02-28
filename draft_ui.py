@@ -116,15 +116,22 @@ class DraftManager:
 
     @classmethod
     def _calculate_anchors(cls, text):
-        """
-        Produces an iterator of (anchor, start_word_index, end_word_index, last_space_index)
-        tuples from the given text. Each tuple indicates a particular point you may want to
-        reference when editing along with some useful ranges you may want to operate on.
+        """Iterator yielding anchors from the text.
 
-        - *index is just a character offset from the start of the string (e.g. the first character is at index 0)
-        - anchor is a short piece of text you can use to identify it (e.g. 'a', or '1').
-        """
+        Anchors are tuples of:
 
+            (anchor, start_word_index, end_word_index, last_space_index)
+
+        Each anchor corresponds to a single word you may want to reference when
+        editing.
+
+        - `index` is a character offset from the start of the string (e.g. the
+          first character is at index 0)
+
+        - `anchor` is a char or chars you can use to identify it (e.g. 'a', or
+          '1').
+
+        """
         line_idx = 1
         char_idx = 0
         word_start_index = None
@@ -168,10 +175,7 @@ class DraftManager:
             yield (next(anchor_labels), word_start_index, len(text), len(text))
 
     def _update_labels(self, _visible_text):
-        """
-        Updates the position of the labels displayed on top of each word
-        """
-
+        """Update label overlay positions."""
         anchors_data = self._calculate_anchors(self._get_visible_text())
         return [
             (Span(start_index, end_index), anchor)
