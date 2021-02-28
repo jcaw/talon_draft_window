@@ -1,12 +1,6 @@
 # These are active when we have focus on the draft window
 title: Talon Draft
 -
-# Replace a single word with a phrase
-replace <user.draft_anchor> with <user.text>:
-  user.draft_select("{draft_anchor}")
-  result = user.formatted_text(text, "NOOP")
-  insert(result)
-
 # Position cursor before word
 move <user.draft_anchor>:
   user.draft_position_caret("{draft_anchor}")
