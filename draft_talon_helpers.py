@@ -27,13 +27,10 @@ class Actions:
         draft_manager.hide()
         ctx.tags = []
 
-    def draft_select(
-            start_anchor: str,
-            end_anchor: str="",
-            include_trailing_whitespace: int=0):
-        """
-        Selects text in the draft window
-        """
+    def draft_select(start_anchor: str,
+                     end_anchor: str="",
+                     include_trailing_whitespace: int=0):
+        """Selects text in the draft window"""
 
         draft_manager.select_text(
             start_anchor,
