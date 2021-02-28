@@ -1,5 +1,5 @@
 # These are active when we have focus on the draft window
-title:Talon Draft
+title: Talon Draft
 -
 # Replace a single word with a phrase
 replace <user.draft_anchor> with <user.text>:
