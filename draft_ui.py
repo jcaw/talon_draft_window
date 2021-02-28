@@ -188,7 +188,9 @@ if False:
     # Some code for testing, change above False to True and edit as desired
     draft_manager = DraftManager()
     draft_manager.show(
-        "This is some text\nand another line of text and some more text so that the line gets so long that it wraps a bit.\nAnd a final sentence"
+        "This is some text"
+        "\nand another line of text and some more text so that the line gets so long that it wraps a bit."
+        "\nAnd a final sentence"
     )
     draft_manager.reposition(xpos=100, ypos=100)
     draft_manager.select_text("c")
