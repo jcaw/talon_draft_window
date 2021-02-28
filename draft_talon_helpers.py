@@ -81,6 +81,7 @@ class Actions:
         draft_manager.reposition(xpos=xpos, ypos=ypos)
 
 
+# TODO: Expand anchors to take any character?
 @mod.capture(rule="{self.letter}+")
 def draft_anchor(m) -> str:
     """An anchor (string of letters)"""
