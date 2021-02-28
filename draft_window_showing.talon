@@ -1,4 +1,4 @@
-# These are available when the draft window is open, but not necessarily focussed
+# These are active when the draft window is open, but not necessarily focussed
 tag: user.draft_window_showing
 -
 hide (draft | transfer): user.draft_hide()
