@@ -7,7 +7,7 @@ LABEL_CHARS = (
     "abcdefghijklmnopqrstuvwxyz"
     # Exclude "2" because "to" is the connector word.
     "134567890"
-    "\/|+.#-_!\"'*:`()[]{}"
+    "\\/|+.#-_!\"'*:`()[]{}"
     # Multi-syllable symbols last, so they're rarer.
     "=,$<>%^&@~;"
 )
