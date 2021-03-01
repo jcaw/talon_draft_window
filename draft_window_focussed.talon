@@ -18,7 +18,7 @@ move <user.draft_anchor>:
   user.draft_select("{draft_anchor}")
 
 # Select a range of words
-(sell | select) <user.draft_anchor> through <user.draft_anchor>:
+(sell | select) <user.draft_anchor> to <user.draft_anchor>:
   user.draft_select("{draft_anchor_1}", "{draft_anchor_2}")
 
 # Delete a word
@@ -27,7 +27,7 @@ move <user.draft_anchor>:
   key(backspace)
 
 # Delete a range of words
-(kill | delete) <user.draft_anchor> through <user.draft_anchor>:
+(kill | delete) <user.draft_anchor> to <user.draft_anchor>:
   user.draft_select("{draft_anchor_1}", "{draft_anchor_2}", 1)
   key(backspace)
 
