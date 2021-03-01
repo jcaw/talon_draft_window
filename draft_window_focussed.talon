@@ -2,6 +2,8 @@
 title: Talon Draft
 tag: user.draft_window_showing
 -
+tag(): user.free_dictation
+
 # Position cursor before word
 move <user.draft_anchor>:
   user.draft_position_caret("{draft_anchor}")
