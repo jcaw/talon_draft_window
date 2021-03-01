@@ -3,6 +3,16 @@ from typing import Optional
 from talon.experimental.textarea import TextArea, Span, DarkThemeLabels
 
 
+LABEL_CHARS = (
+    "abcdefghijklmnopqrstuvwxyz"
+    # Exclude "2" because "to" is the connector word.
+    "134567890"
+    "\/|+.#-_!\"'*:`()[]{}"
+    # Multi-syllable symbols last, so they're rarer.
+    "=,$<>%^&@~;"
+)
+
+
 class DraftManager:
     """Use to interface with the draft window."""
 
@@ -101,14 +111,12 @@ class DraftManager:
 
         self.area.replace(Span(start_index, end_index), updated_text)
 
-    @staticmethod
-    def _iterate_anchor_labels():
-        characters = [chr(i) for i in range(ord("a"), ord("z") + 1)]
-        for c in characters:
-            yield c
+    @classmethod
+    def _iterate_anchor_labels(cls):
+        yield from LABEL_CHARS
 
-        for c in characters:
-            for d in characters:
+        for c in LABEL_CHARS:
+            for d in LABEL_CHARS:
                 yield f"{c}{d}"
 
     @classmethod
