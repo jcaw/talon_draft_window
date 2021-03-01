@@ -17,6 +17,8 @@ draft_manager = DraftManager()
 class Actions:
     def draft_show(text: Optional[str] = None):
         """Show draft window"""
+        # Toggle to gain focus
+        draft_manager.hide()
         draft_manager.show(text)
         ctx.tags = ["user.draft_window_showing"]
 
