@@ -28,7 +28,7 @@ move <user.draft_anchor>:
 
 # Delete a range of words
 (kill | delete) <user.draft_anchor> through <user.draft_anchor>:
-  user.draft_select("{draft_anchor}", "{draft_anchor}", 1)
+  user.draft_select("{draft_anchor_1}", "{draft_anchor_2}", 1)
   key(backspace)
 
 # Make a word title case
