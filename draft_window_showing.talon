@@ -8,7 +8,7 @@ kill (draft | transfer):
     user.draft_hide()
 
 (submit | transfer) [draft | dictate]:
-  content = user.draft_get_text()
-  user.draft_hide()
-  # TODO: Insert, instead of paste?
-  user.paste(content)
+    content = user.draft_get_text()
+    user.draft_hide()
+    # TODO: Insert, instead of paste?
+    user.paste(content)
