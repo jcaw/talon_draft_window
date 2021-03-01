@@ -19,11 +19,10 @@ empty (draft | dictate): user.draft_show("")
 
 (draft | dictate) (that | thing):
     text = edit.selected_text()
-    key(backspace)
+    # TODO: Replace text on submission, e.g. Emacs
     user.draft_show(text)
 
 (draft | dictate) all:
     edit.select_all()
     text = edit.selected_text()
-    key(backspace)
     user.draft_show(text)
