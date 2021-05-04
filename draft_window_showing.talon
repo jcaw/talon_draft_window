@@ -1,9 +1,9 @@
 # Active when the draft window is open, but not necessarily focussed
 tag: user.draft_window_showing
 -
-hide (draft | transfer): user.draft_hide()
+hide (draft | dictate): user.draft_hide()
 
-kill (draft | transfer):
+(kill | discard) (draft | dictate):
     user.draft_clear()
     user.draft_hide()
 
