@@ -9,6 +9,6 @@ hide (draft | dictate): user.draft_hide()
 
 (submit | transfer) [draft | dictate]:
     content = user.draft_get_text()
+    clip.set_text(content)
     user.draft_hide()
-    # TODO: Transfer via paste?
-    insert(content)
+    edit.paste()
