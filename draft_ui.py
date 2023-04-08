@@ -11,6 +11,7 @@ from talon.experimental.textarea import (
 from talon import ui, actions
 
 
+DRAFT_WINDOW_TITLE = "Talon Draft"
 LABEL_CHARS = (
     "abcdefghijklmnopqrstuvwxyz"
     # Exclude "2" because "to" is the connector word.
@@ -64,6 +65,16 @@ def calculate_text_anchors(text, cursor_position, anchor_labels=LABEL_CHARS):
         yield (anchor, word_start, word_end, whitespace_end)
 
 
+def _draft_window_active():
+    """Is the draft window currently active?"""
+    # HACK: Imprecise matching since can't access the draft window itself, only
+    #   the TextArea.
+    active_window = ui.active_window()
+    return (
+        active_window.app.name == "Talon" and active_window.title == DRAFT_WINDOW_TITLE
+    )
+
+
 class DraftManager:
     """Use to interface with the draft window."""
 
@@ -98,6 +109,13 @@ class DraftManager:
     def hide(self):
         """Hide the window."""
         self.area.hide()
+
+        # Max wait, 3 seconds
+        for i in range(int(math.ceil(3 / 0.016))):
+            if _draft_window_active():
+                actions.sleep("16ms")
+            else:
+                break
 
     def get_text(self) -> str:
         """Gets the context of the text area"""
