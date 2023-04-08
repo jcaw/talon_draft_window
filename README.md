@@ -1,8 +1,12 @@
+*NOTE:* This is my personal fork of the original Talon Draft Window script. It has changes that are dependent on my own talon config, so the information in this repo may be misleading or wrong.
+
+---
+
 This reposiory is a [Talon](https://talonvoice.com/) script that allows you to more easily edit prose style text via a task-specific UI. It currently requires the beta version of Talon.
 
 # Usage
 
-The `draft_window.talon` file depends on functions and lists defined by the [knausj\_talon](https://github.com/knausj85/knausj_talon) repo. Once you have knausj set up you can just drop this folder in next to it in the Talon user scripts directory (~/.talon/user/ under Linux). Alternatively you can edit the `draft_window.talon` file for your needs.
+~~The `draft_window.talon` file depends on functions and lists defined by the [knausj\_talon](https://github.com/knausj85/knausj_talon) repo. Once you have knausj set up you can just drop this folder in next to it in the Talon user scripts directory (~/.talon/user/ under Linux). Alternatively you can edit the `draft_window.talon` file for your needs.~~
 
 Once that's set up, an example voice command session might go like:
 
