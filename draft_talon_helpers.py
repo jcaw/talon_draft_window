@@ -313,9 +313,15 @@ tag: user.draft_window_showing
 
 @draft_window_context.action_class("user")
 class DraftWindowActions:
-    def surrounding_text() -> Optional[SurroundingText]:
+    def surrounding_text():
+        from user.misc.chunked_phrase import SurroundingText
+
+        CONTEXT_LIMIT = 1000
+
         area = draft_manager.area
+        # Unlike e.g. Emacs, selection would be erased - so give context around
+        # selection.
         return SurroundingText(
-            text_before=area[area.sel.left - 50 : area.sel.left],
-            text_after=area[area.sel.right : area.sel.right + 50],
+            area[max(0, area.sel.left - CONTEXT_LIMIT) : area.sel.left],
+            area[area.sel.right : area.sel.right + CONTEXT_LIMIT],
         )
