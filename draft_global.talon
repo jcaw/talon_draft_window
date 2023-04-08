@@ -26,3 +26,8 @@ empty (draft | dictate): user.draft_show("")
     edit.select_all()
     text = edit.selected_text()
     user.draft_show(text)
+
+^draft <user.complex_phrase>:
+    user.draft_show()
+    sleep(1s)
+    user.insert_complex(complex_phrase, "sentence")
