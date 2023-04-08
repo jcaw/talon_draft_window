@@ -7,8 +7,15 @@ hide (draft | dictate): user.draft_hide()
     user.draft_clear()
     user.draft_hide()
 
-(submit | transfer) [draft | dictate]:
+# TODO: Extract common stuff into an action
+finish:
     content = user.draft_get_text()
     clip.set_text(content)
     user.draft_hide()
     edit.paste()
+submit:
+    content = user.draft_get_text()
+    clip.set_text(content)
+    user.draft_hide()
+    edit.paste()
+    key(enter)
