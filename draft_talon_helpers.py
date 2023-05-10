@@ -238,12 +238,16 @@ class Actions:
         draft_manager.area.value = ""
 
     def draft_select(
-        start_anchor: str, end_anchor: str = "", include_trailing_whitespace: int = 0
+        start_anchor: str,
+        end_anchor: str = "",
+        include_leading_whitespace: int = 0,
+        include_trailing_whitespace: int = 0,
     ):
         """Selects text in the draft window"""
         draft_manager.select_text(
             start_anchor,
             end_anchor=None if end_anchor == "" else end_anchor,
+            include_leading_whitespace=include_leading_whitespace == 1,
             include_trailing_whitespace=include_trailing_whitespace == 1,
         )
 

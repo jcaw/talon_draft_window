@@ -13,7 +13,7 @@ move <user.draft_anchor>:
 
 # Position cursor after word
 [move] after <user.draft_anchor>:
-  user.draft_position_caret("{draft_anchor}", 1)
+  user.draft_position_caret("{draft_anchor}", 0, 1)
 
 # Select a whole word
 (sell | select) <user.draft_anchor>:
@@ -25,12 +25,12 @@ move <user.draft_anchor>:
 
 # Delete a word
 (kill | delete) <user.draft_anchor>:
-  user.draft_select("{draft_anchor}", "", 1)
+  user.draft_select("{draft_anchor}", "", 1, 1)
   key(backspace)
 
 # Delete a range of words
 (kill | delete) <user.draft_anchor> to <user.draft_anchor>:
-  user.draft_select("{draft_anchor_1}", "{draft_anchor_2}", 1)
+  user.draft_select("{draft_anchor_1}", "{draft_anchor_2}", 1, 1)
   key(backspace)
 
 # Make a word title case

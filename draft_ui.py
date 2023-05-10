@@ -62,7 +62,9 @@ def calculate_text_anchors(text, cursor_position, anchor_labels=LABEL_CHARS):
     # Now add anchors to the selected matches
     for i, anchor in zip(range(anchor_start_idx, anchor_end_idx), anchor_labels):
         word_start, word_end, whitespace_end = matches[i]
-        yield (anchor, word_start, word_end, whitespace_end)
+        # Leading whitespace
+        whitespace_start = re.search("[ \t]*$", text[:word_start]).start()
+        yield (anchor, word_start, word_end, whitespace_start, whitespace_end)
 
 
 def _draft_window_active():
@@ -149,21 +151,35 @@ class DraftManager:
         self.area.rect = rect
 
     def select_text(
-        self, start_anchor, end_anchor=None, include_trailing_whitespace=False
+        self,
+        start_anchor,
+        end_anchor=None,
+        include_leading_whitespace=False,
+        include_trailing_whitespace=False,
     ):
         """Select word by its anchor (or range with two anchors)."""
-        start_index, end_index, last_space_index = self.anchor_to_range(start_anchor)
+        (
+            start_index,
+            end_index,
+            first_space_index,
+            last_space_index,
+        ) = self.anchor_to_range(start_anchor)
         if end_anchor is not None:
-            _, end_index, last_space_index = self.anchor_to_range(end_anchor)
+            _, end_index, _, last_space_index = self.anchor_to_range(end_anchor)
 
-        if include_trailing_whitespace:
+        # HACK: to preserve good spacing, only include trailing whitespace when
+        #   there's no leading whitespace. Ugly! Redo this properly at some
+        #   point.
+        if include_leading_whitespace and first_space_index < start_index:
+            start_index = first_space_index
+        elif include_trailing_whitespace:
             end_index = last_space_index
 
         self.area.sel = Span(start_index, end_index)
 
     def position_caret(self, anchor, after=False):
         """Move caret before `anchor` (or after with `after`)."""
-        start_index, end_index, _ = self.anchor_to_range(anchor)
+        start_index, end_index, _, _ = self.anchor_to_range(anchor)
         index = end_index if after else start_index
 
         self.area.sel = index
@@ -172,9 +188,15 @@ class DraftManager:
         anchors_data = calculate_text_anchors(
             self._get_visible_text(), self.area.sel.left
         )
-        for loop_anchor, start_index, end_index, last_space_index in anchors_data:
+        for (
+            loop_anchor,
+            start_index,
+            end_index,
+            first_space_index,
+            last_space_index,
+        ) in anchors_data:
             if anchor == loop_anchor:
-                return (start_index, end_index, last_space_index)
+                return (start_index, end_index, first_space_index, last_space_index)
 
         raise RuntimeError(f"Couldn't find anchor {anchor}")
 
@@ -186,7 +208,7 @@ class DraftManager:
         )
         return [
             (Span(start_index, end_index), anchor)
-            for anchor, start_index, end_index, _ in anchors_data
+            for anchor, start_index, end_index, _, _ in anchors_data
         ]
 
     def _get_visible_text(self):
