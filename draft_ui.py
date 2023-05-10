@@ -47,7 +47,16 @@ def calculate_text_anchors(text, cursor_position, anchor_labels=LABEL_CHARS):
     matches = []
     cursor_idx = None
     for match in word_matcher.finditer(text):
-        matches.append((match.start(), match.end() - len(match.group(2)), match.end()))
+        matches.append(
+            (
+                # Words start
+                match.start(),
+                # Words end
+                match.end() - len(match.group(2)),
+                # After trailing whitespace
+                match.end(),
+            )
+        )
         if matches[-1][0] <= cursor_position and matches[-1][2] >= cursor_position:
             cursor_idx = len(matches) - 1
 
