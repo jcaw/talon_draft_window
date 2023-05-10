@@ -108,6 +108,13 @@ class DraftManager:
             self.area.value = text
         self.area.show()
 
+        # Max wait, 3 seconds
+        for i in range(int(math.ceil(3 / 0.016))):
+            if _draft_window_active():
+                break
+            else:
+                actions.sleep("16ms")
+
     def hide(self):
         """Hide the window."""
         self.area.hide()
