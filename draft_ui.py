@@ -22,6 +22,7 @@ LABEL_CHARS = (
 )
 
 
+# TODO: \s probably wrong? Should be [ \t]?
 word_matcher = re.compile(r"([^\s]+)(\s*)")
 
 
