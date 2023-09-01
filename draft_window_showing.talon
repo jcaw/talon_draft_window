@@ -3,7 +3,7 @@ tag: user.draft_window_showing
 -
 hide (draft | dictate): user.draft_hide()
 
-(kill | discard) (draft | dictate):
+(kill | discard | close) (draft | dictate):
     user.draft_clear()
     user.draft_hide()
 
