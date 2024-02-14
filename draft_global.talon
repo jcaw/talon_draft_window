@@ -1,7 +1,7 @@
 # These are available globally (in command mode)
 mode: command
 -
-^(draft | dictate): user.draft_show()
+^(draft | dictate): user.draft_current_textbox()
 
 ^(draft | dictate) <user.draft_window_position>:
     user.draft_show()
@@ -22,10 +22,7 @@ mode: command
     # TODO: Replace text on submission, e.g. Emacs
     user.draft_show(text)
 
-^(draft | dictate) all:
-    edit.select_all()
-    text = edit.selected_text()
-    user.draft_show(text)
+# ^(draft | dictate) all: user.draft_current_textbox()
 
 ^draft <user.complex_phrase>:
     user.draft_show()

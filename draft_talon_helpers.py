@@ -227,6 +227,12 @@ class Actions:
         UndoWorkaround.start_logger(text is not None)
         ctx.tags = ["user.draft_window_showing"]
 
+    def draft_current_textbox():
+        """Select all the text in the current textbox, and open a draft window to edit it."""
+        actions.edit.select_all()
+        text = actions.edit.selected_text()
+        actions.user.draft_show(text)
+
     def draft_hide():
         """Hide draft window"""
         draft_manager.hide()
