@@ -237,6 +237,11 @@ class Actions:
         """Delete all text in draft window."""
         draft_manager.area.value = ""
 
+    def draft_cancel():
+        """Delete all text in the draft window, and hide it."""
+        actions.self.draft_clear()
+        actions.self.draft_hide()
+
     def draft_select(
         start_anchor: str,
         end_anchor: str = "",
