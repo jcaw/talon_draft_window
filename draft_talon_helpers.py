@@ -227,6 +227,17 @@ class Actions:
         UndoWorkaround.start_logger(text is not None)
         ctx.tags = ["user.draft_window_showing"]
 
+        # Set the default draft window size
+        r = ui.active_window().screen.rect
+        x_inset = int(r.width / 5)
+        y_inset = int(r.height / 5)
+        draft_manager.reposition(
+            xpos=r.x + x_inset,
+            ypos=r.y + y_inset,
+            width=r.width - x_inset * 2,
+            height=r.height - y_inset * 2,
+        )
+
     def draft_current_textbox():
         """Select all the text in the current textbox, and open a draft window to edit it."""
         actions.edit.select_all()
