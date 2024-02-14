@@ -15,7 +15,7 @@ mode: command
     user.draft_show()
     user.draft_resize(800, 500)
 
-^empty (draft | dictate): user.draft_show("")
+^(empty | new) (draft | dictate): user.draft_show("")
 
 ^(draft | dictate) (that | thing):
     text = edit.selected_text()
