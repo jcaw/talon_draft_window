@@ -295,6 +295,12 @@ class Actions:
         ypos += screen.y
         draft_manager.reposition(xpos=xpos, ypos=ypos)
 
+    def draft_finish():
+        """Finish drafting and transfer the text to the target program."""
+
+    def draft_finish_and_submit():
+        """Finish drafting, transfer the text to the target and press enter."""
+
 
 @mod.capture(rule="(<self.character> | <user.digit>)+")
 def draft_anchor(m) -> str:
@@ -329,3 +335,13 @@ class DraftWindowActions:
             area[max(0, area.sel.left - CONTEXT_LIMIT) : area.sel.left],
             area[area.sel.right : area.sel.right + CONTEXT_LIMIT],
         )
+
+    def draft_finish():
+        content = actions.self.draft_get_text()
+        actions.clip.set_text(content)
+        actions.self.draft_hide()
+        actions.edit.paste()
+
+    def draft_finish_and_submit():
+        actions.self.draft_finish
+        actions.key("enter")
