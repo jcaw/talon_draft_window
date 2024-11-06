@@ -46,7 +46,7 @@ def calculate_text_anchors(text, cursor_position, anchor_labels=LABEL_CHARS):
 
     # Find all the word spans
     matches = []
-    cursor_idx = None
+    cursor_idx = 0
     for match in word_matcher.finditer(text):
         matches.append(
             (

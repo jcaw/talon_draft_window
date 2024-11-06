@@ -2,6 +2,9 @@ from typing import Optional
 from talon import ui, settings, Module, Context, actions
 from .draft_ui import DraftManager
 
+from user.misc.chunked_phrase import SurroundingText
+
+
 mod = Module()
 
 # ctx is for toggling the draft_window_showing variable
@@ -47,18 +50,14 @@ setting_text_size = mod.setting(
 
 draft_manager = DraftManager()
 
+
 # Update the styling of the draft window dynamically as user settings change
 def _update_draft_style(*args):
     draft_manager.set_styling(
-        **{
-            arg: setting.get()
-            for setting, arg in (
-                (setting_theme, "theme"),
-                (setting_label_size, "label_size"),
-                (setting_label_color, "label_color"),
-                (setting_text_size, "text_size"),
-            )
-        }
+        theme=settings.get("user.draft_window_theme"),
+        label_size=settings.get("user.draft_window_label_size"),
+        label_color=settings.get("user.draft_window_label_color"),
+        text_size=settings.get("user.draft_window_text_size"),
     )
 
 
@@ -345,8 +344,7 @@ tag: user.draft_window_showing
 
 @draft_window_context.action_class("user")
 class DraftWindowActions:
-    def surrounding_text():
-        from user.misc.chunked_phrase import SurroundingText
+    def surrounding_text() -> Optional[SurroundingText]:
 
         CONTEXT_LIMIT = 1000
 
